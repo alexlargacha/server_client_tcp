@@ -50,7 +50,7 @@ int main()
 		exit(1);
 	}
 
-	printf("Ha llegado el cliente: %s\n", dir);
+	printf("[ServerTCP] String from client: %s\n", dir);
 
 	for(i=0; i<strlen(dir); i++)
 	{
@@ -66,4 +66,3 @@ int main()
 	close(fd);
 	close(sd);
 }
-

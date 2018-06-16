@@ -13,10 +13,11 @@ void main (int argc, char *argv[])
 	int fdc;
 	struct sockaddr_in server_in;
 	struct hostent *hp;
-	
+
 	if(argc != 3)
 	{
-		printf("Uso %s servidor frase\n", argv[0]);
+		printf("[ClientTCP]Usage of %s phrase server\n", argv[0]);
+		printf("./ClientTCP <server_ip> <\"text>\"\n", argv[0]);
 		exit(1);
 	}
 
@@ -54,8 +55,7 @@ void main (int argc, char *argv[])
 		exit(1);
 	}
 
-	printf("Ha llegado del servidor: %s\n", dir);
+	printf("[ClientTCP]String received from server: %s\n", dir);
 
 	close(fdc);
 }
-
