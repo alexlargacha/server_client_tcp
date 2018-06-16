@@ -12,12 +12,12 @@ Run the following commands to build the server and the Client
 ```
 $ cd server_client_tcp
 $ gcc ClientTCP.c -o ClientTCP
-$ gcc ServidorTCP.c -o ServidorTCP
+$ gcc ServerTCP.c -o ServerTCP
 ```
 
 ## Run the example
 
 ```
-$ ./ServidorTCP &
-$ ./ClienteTCP 127.0.0.1 "Hello World"
+$ ./ServerTCP &
+$ ./ClientTCP 127.0.0.1 "Hello World"
 ```
