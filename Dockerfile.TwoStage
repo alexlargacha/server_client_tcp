@@ -1,0 +1,27 @@
+# This is the base for our build step container
+# which has all our build essentials
+FROM alpine AS builder
+
+RUN apk add --no-cache \
+            build-base
+
+COPY ClientTCP.c /app/ClientTCP.c
+WORKDIR /app
+RUN gcc -o ClientTCP ClientTCP.c && chmod +x ClientTCP
+
+CMD ["ash"]
+
+##############################################################################
+
+# This is our runtime container that will end up
+# running on the device.
+FROM alpine
+
+# Defines our working directory in container
+RUN mkdir -p /usr/src/app/
+WORKDIR /usr/src/app
+
+# Copy our artifact into our deployable container context.
+COPY --from=builder /app/ClientTCP ./ClientTCP
+
+ENTRYPOINT ["/usr/src/app/ClientTCP"]
