@@ -3,11 +3,12 @@
 FROM alpine AS builder
 
 RUN apk add --no-cache \
-            build-base
+            build-base \
+            cmake
 
-COPY ClientTCP.c /app/ClientTCP.c
-WORKDIR /app
-RUN gcc -o ClientTCP ClientTCP.c && chmod +x ClientTCP
+COPY client_tcp /app/client_tcp
+WORKDIR /app/client_tcp
+RUN mkdir build && cd build && cmake .. && make
 
 CMD ["ash"]
 
@@ -22,6 +23,6 @@ RUN mkdir -p /usr/src/app/
 WORKDIR /usr/src/app
 
 # Copy our artifact into our deployable container context.
-COPY --from=builder /app/ClientTCP ./ClientTCP
+COPY --from=builder /app/client_tcp/build/ClientTCP ./ClientTCP
 
 ENTRYPOINT ["/usr/src/app/ClientTCP"]
